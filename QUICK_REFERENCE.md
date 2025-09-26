@@ -22,6 +22,13 @@ tree-sitter parse file.ext
 
 # Parse with debug output
 tree-sitter parse --debug file.ext
+
+# Global grammar directory workflow
+tree-sitter init-config
+# Edit config.json -> add a parser-directories entry, e.g. ~/src/tree-sitter-languages
+mkdir -p ~/src/tree-sitter-languages && cd ~/src/tree-sitter-languages
+git clone https://github.com/tree-sitter/tree-sitter-javascript.git
+tree-sitter parse /path/to/file.js
 ```
 
 ## 📝 Grammar Functions Reference

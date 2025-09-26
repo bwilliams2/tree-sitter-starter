@@ -1,23 +1,23 @@
 # Module 2: Setup and Installation
 
-Time to get your hands dirty! In this module, we'll install Tree-sitter and set up your development environment for parser development.
+Time to get your hands dirty! In this module, we'll install the Tree-sitter CLI and verify it's working correctly.
 
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
 - Have Tree-sitter CLI installed and working
-- Understand the Tree-sitter development workflow
-- Successfully run your first Tree-sitter commands
-- Have a proper development environment setup
+- Know how to verify your installation
+- Understand basic CLI commands available
 
 ## 📋 Prerequisites Checklist
 
 Before we start, make sure you have:
 - [ ] **Command line access** (Terminal, PowerShell, etc.)
-- [ ] **Node.js** installed (version 12 or higher)
-- [ ] **Git** installed
-- [ ] **A text editor** (VS Code, Vim, Emacs, etc.)
-- [ ] **C compiler** (gcc, clang, or Visual Studio)
+- [ ] **One of the following package managers:**
+  - **Node.js** (version 12 or higher) with npm
+  - **Rust** with cargo
+  - **Homebrew** (macOS)
+  - **Package manager** for your Linux distribution
 
 ## 🔧 Installation Methods
 
@@ -105,171 +105,6 @@ FLAGS:
 ...
 ```
 
-### Test 3: Quick Parse Test
-```bash
-# Create a test file
-echo "console.log('Hello, Tree-sitter!');" > test.js
-
-# Parse it (this will fail gracefully if no JavaScript parser is installed)
-tree-sitter parse test.js
-```
-
-## 📁 Setting Up Your Workspace
-
-Let's create a dedicated workspace for your Tree-sitter learning:
-
-```bash
-# Create and navigate to workspace
-mkdir tree-sitter-learning
-cd tree-sitter-learning
-
-# Create directory structure
-mkdir -p {parsers,examples,playground}
-
-# Your workspace is ready!
-```
-
-**Directory structure:**
-```
-tree-sitter-learning/
-├── parsers/          # Your custom parsers
-├── examples/         # Code samples to test with
-└── playground/       # Experimentation space
-```
-
-## 🎮 Your First Tree-sitter Commands
-
-### 1. Initialize a New Parser Project
-
-```bash
-cd parsers
-tree-sitter init-config-file
-tree-sitter init-config-file
-```
-
-This creates a `tree-sitter-config.json` file with default settings.
-
-### 2. Generate a Parser
-
-Let's start with a simple example:
-
-```bash
-# Create a new parser directory
-mkdir my-first-parser
-cd my-first-parser
-
-# Initialize the parser
-tree-sitter init
-```
-
-**What this creates:**
-- `grammar.js` - Your grammar definition
-- `package.json` - NPM package configuration  
-- `binding.gyp` - Node.js native module configuration
-- `src/` directory - Generated parser source code
-
-### 3. Explore an Existing Parser
-
-Download and explore a simple existing parser:
-
-```bash
-# Clone a simple parser (JSON)
-git clone https://github.com/tree-sitter/tree-sitter-json.git
-cd tree-sitter-json
-
-# Look at the grammar
-cat grammar.js
-```
-
-## 🔍 Understanding the Workflow
-
-The Tree-sitter development cycle:
-
-```
-1. Write Grammar     2. Generate Parser    3. Test Parser
-   (grammar.js)         (tree-sitter         (tree-sitter
-                        generate)            parse/test)
-       │                    │                     │
-       └────────────────────┼─────────────────────┘
-                           │
-                    4. Iterate and Improve
-```
-
-### Step-by-Step Example
-
-Let's walk through creating a tiny parser:
-
-#### Step 1: Define Grammar
-Create `grammar.js`:
-```javascript
-module.exports = grammar({
-  name: 'simple_math',
-  
-  rules: {
-    expression: $ => choice(
-      $.number,
-      $.addition
-    ),
-    
-    number: $ => /\d+/,
-    
-    addition: $ => seq(
-      $.number,
-      '+',
-      $.number
-    )
-  }
-});
-```
-
-#### Step 2: Generate Parser
-```bash
-tree-sitter generate
-```
-
-#### Step 3: Test Parser
-```bash
-# Create test input
-echo "5 + 3" > test.txt
-
-# Parse it
-tree-sitter parse test.txt
-```
-
-**Expected output:**
-```
-(expression
-  (addition
-    (number)
-    (number)))
-```
-
-## 🛠️ Development Environment Setup
-
-### VS Code Extensions
-Install helpful extensions:
-- **Tree-sitter**: Syntax highlighting for grammar files
-- **Language Support**: For languages you're working with
-
-### Editor Configuration
-
-**VS Code settings.json:**
-```json
-{
-  "files.associations": {
-    "grammar.js": "javascript",
-    "*.scm": "scheme"
-  }
-}
-```
-
-**Vim configuration:**
-```vim
-" Add to .vimrc
-au BufRead,BufNewFile grammar.js set filetype=javascript
-au BufRead,BufNewFile *.scm set filetype=scheme
-```
-
 ## 🚨 Common Installation Issues
 
 ### Issue 1: `tree-sitter: command not found`
@@ -286,7 +121,7 @@ export PATH="$PATH:/usr/local/lib/node_modules/.bin"
 npx tree-sitter --version
 ```
 
-### Issue 2: `node-gyp` Build Errors
+### Issue 2: `node-gyp` Build Errors (NPM installation)
 
 **Solutions:**
 ```bash
@@ -313,107 +148,16 @@ npm config set prefix '~/.npm-global'
 export PATH=~/.npm-global/bin:$PATH
 ```
 
-## 🧪 Testing Your Setup
-
-Let's run through a comprehensive test to make sure everything works:
-
-### Create Test Files
-```bash
-# JavaScript test
-echo "function test() { return 42; }" > test.js
-
-# Python test  
-echo "def test(): return 42" > test.py
-
-# JSON test
-echo '{"name": "test", "value": 42}' > test.json
-```
-
-### Test Parsing
-```bash
-# These might not work yet (parsers not installed)
-# But they should show helpful error messages
-tree-sitter parse test.js
-tree-sitter parse test.py  
-tree-sitter parse test.json
-```
-
-### Install Sample Parsers
-```bash
-# Install some common parsers for testing
-npm install tree-sitter-javascript
-npm install tree-sitter-python
-npm install tree-sitter-json
-```
-
 ## 📊 Success Checklist
 
 Verify you can do all of these:
 
 - [ ] ✅ `tree-sitter --version` shows version number
 - [ ] ✅ `tree-sitter --help` shows help text
-- [ ] ✅ Can create new parser with `tree-sitter init`  
-- [ ] ✅ Can generate parser with `tree-sitter generate`
-- [ ] ✅ Can parse files with `tree-sitter parse`
-- [ ] ✅ Have workspace directory created
-- [ ] ✅ Text editor configured for grammar development
-
-## 💡 Pro Tips
-
-1. **Use Version Control**: Always use git for your parser projects
-2. **Incremental Development**: Start with simple rules and add complexity gradually
-3. **Test Early and Often**: Use `tree-sitter parse` constantly during development
-4. **Study Existing Parsers**: The Tree-sitter org has excellent examples
-5. **Join the Community**: The Tree-sitter discussions are very helpful
-
-## 🔧 Optional: Advanced Setup
-
-### Language Server Support
-For advanced editor integration:
-
-```bash
-# Install tree-sitter language server
-npm install -g @tree-sitter/cli
-```
-
-### Build Automation
-Create a `Makefile` for your parser projects:
-
-```makefile
-.PHONY: generate test clean
-
-generate:
-	tree-sitter generate
-
-test:
-	tree-sitter test
-
-clean:
-	rm -rf src/
-
-build: generate
-	tree-sitter build-wasm
-```
-
-## 🔍 Troubleshooting
-
-### Debug Mode
-Enable verbose output for troubleshooting:
-
-```bash
-tree-sitter --debug parse file.txt
-```
-
-### Check Configuration
-View current configuration:
-
-```bash
-tree-sitter dump-config
-```
 
 ## ➡️ What's Next?
 
-Excellent! You now have Tree-sitter installed and ready to go. In the next module, we'll dive deep into understanding how syntax trees work by exploring existing parsers.
+Excellent! You now have Tree-sitter CLI installed and ready to go. In the next module, we'll dive deep into understanding how syntax trees work by exploring existing parsers.
 
 **[Continue to Module 3: Understanding Syntax Trees →](../03-syntax-trees/README.md)**
 
@@ -423,21 +167,105 @@ Excellent! You now have Tree-sitter installed and ready to go. In the next modul
 
 **What you accomplished:**
 - ✅ Installed Tree-sitter CLI
-- ✅ Set up development environment  
-- ✅ Ran your first Tree-sitter commands
-- ✅ Created a workspace structure
-- ✅ Learned the basic development workflow
+- ✅ Verified installation is working
 
 **Key concepts learned:**
-- Tree-sitter development cycle (write → generate → test → iterate)
-- Common CLI commands (`generate`, `parse`, `test`)
-- Project structure and configuration files
+- Different installation methods for Tree-sitter CLI
+- How to verify your installation
+- Common installation issues and solutions
 
 **Commands mastered:**
 - `tree-sitter --version`
-- `tree-sitter --help` 
-- `tree-sitter init`
-- `tree-sitter generate`
-- `tree-sitter parse`
+- `tree-sitter --help`
 
 You're now ready to start exploring how parsers actually work! 🚀
+
+---
+
+## 🌐 (Optional but Powerful) Configure Global Grammar Directories
+
+If you want the `tree-sitter` CLI to automatically recognize languages you clone (without custom scripts), you can configure a set of directories where grammar repositories live. On startup, the CLI will discover any subfolder whose name matches `tree-sitter-<language>` and (re)generate/compile it as needed.
+
+### Step 1: Generate Your Config File
+Run once:
+```bash
+tree-sitter init-config
+```
+This creates a JSON config file at one of these locations (platform dependent):
+| Platform | Default Path |
+|----------|--------------|
+| macOS    | `~/Library/Application Support/tree-sitter/config.json` (older versions: `~/.tree-sitter/config.json`) |
+| Linux    | `~/.tree-sitter/config.json` |
+| Windows  | `%APPDATA%/tree-sitter/config.json` |
+
+Open that file and look for a `parser-directories` array. You can add one or more folders where you’ll keep language repos. Example minimal content (do NOT copy verbatim if extra keys already exist—just edit the array):
+```jsonc
+{
+  "parser-directories": [
+    "/Users/you/src/tree-sitter-languages"
+  ]
+}
+```
+
+### Step 2: Create a Languages Folder
+```bash
+mkdir -p ~/src/tree-sitter-languages
+```
+
+### Step 3: Clone Grammar Repositories
+Clone only what you need; you can add more later.
+```bash
+cd ~/src/tree-sitter-languages
+git clone https://github.com/tree-sitter/tree-sitter-javascript.git
+git clone https://github.com/tree-sitter/tree-sitter-python.git
+git clone https://github.com/tree-sitter/tree-sitter-json.git
+```
+
+### Step 4: (Re)Start Using the CLI
+The next time you invoke a grammar-aware command, the CLI will build these parsers automatically. If you just cloned them, you can force an initial parse to trigger builds:
+```bash
+tree-sitter parse path/to/some/file.js
+```
+
+If you see `No language found`, double‑check:
+1. The grammar repo name matches `tree-sitter-<language>`
+2. The directory containing those repos is listed in `parser-directories`
+3. You have a working C toolchain (e.g. Xcode CLT on macOS, build-essential on Debian/Ubuntu)
+4. You restarted the shell if you just installed the CLI
+
+### Step 5: Verify Multiple Languages
+```bash
+tree-sitter parse examples/example.py
+tree-sitter parse examples/config.json
+```
+
+### Updating Grammars Later
+```bash
+cd ~/src/tree-sitter-languages/tree-sitter-python
+git pull --ff-only
+```
+Re-run a `tree-sitter parse`—the CLI will rebuild if needed.
+
+### Adding More Languages
+Simply clone additional grammars into the same directory:
+```bash
+git clone https://github.com/tree-sitter/tree-sitter-rust.git
+```
+
+### When to Use This Approach
+Use the config-based grammar directories when you:
+- Want a central cache of grammars usable across many projects
+- Regularly switch between languages
+- Prefer not to manage per-project Node dependencies just to parse code
+
+Skip it if you only need grammars inside a single dedicated tool project (in that case a local script / direct dependency may be simpler).
+
+### Troubleshooting Cheatsheet
+| Symptom | Likely Cause | Fix |
+|---------|--------------|-----|
+| `No language found` | Repo not in a configured directory | Add directory to `parser-directories` |
+| Build errors (C compiler missing) | Toolchain not installed | Install platform build tools |
+| Old grammar behavior | Stale repo | `git pull` the grammar folder |
+| New repo ignored | Name doesn’t match pattern | Rename to `tree-sitter-<lang>` |
+
+With grammar directories configured, later modules (like Module 3) become smoother—no custom scripts required if you prefer the native workflow.

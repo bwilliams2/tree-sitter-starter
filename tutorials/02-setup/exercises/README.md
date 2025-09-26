@@ -1,6 +1,6 @@
 # Module 2 Exercises
 
-Practice setting up Tree-sitter.
+Practice installing and verifying Tree-sitter CLI.
 
 ## Exercise 1: Installation
 
@@ -8,27 +8,23 @@ Practice setting up Tree-sitter.
 2. Test with: `node examples/test-install.js`
 3. Try: `tree-sitter --version` and `tree-sitter --help`
 
-## Exercise 2: First Parser Project
+## Exercise 2: Manual Installation
 
+Try installing Tree-sitter using a different method:
+- If you used npm, try cargo or brew
+- If you used brew, try npm
+- Compare the results with `tree-sitter --version`
+
+## Exercise 3: Command Exploration
+
+Explore the available commands:
 ```bash
-mkdir my-parser
-cd my-parser
-tree-sitter init
+tree-sitter --help
 ```
 
 **Questions:**
-- What files were created?
-- Look at `grammar.js` - what's in it?
-- Try `tree-sitter generate` - what happens?
-
-## Exercise 3: Simple Test
-
-Create a test file and try to parse it:
-```bash
-echo "hello" > test.txt
-tree-sitter parse test.txt
-```
-
-**Expected:** It should fail because there's no grammar yet. This is normal!
+- What subcommands are available?
+- What does each command do? (Use `tree-sitter <command> --help`)
+- Which commands might be useful for parser development?
 
 Check `solutions/` for detailed explanations.

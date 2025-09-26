@@ -11,19 +11,30 @@
 - ✅ Help command works  
 - ✅ Generate command available
 
-## Exercise 2: First Parser Project
+## Exercise 2: Manual Installation
 
-**Files created:**
-- `grammar.js` - Empty grammar template
-- `package.json` - NPM configuration
-- `binding.gyp` - C compilation configuration
+**Different methods should result in:**
+- Same version number from `tree-sitter --version`
+- Same functionality available
 
-**After `tree-sitter generate`:**
-- `src/` directory with C parser code
-- `parser.c` and header files
+**Common differences:**
+- Installation path may vary
+- Some methods (npm) may install development dependencies
+- Performance may vary slightly between implementations
 
-## Exercise 3: Simple Test
+## Exercise 3: Command Exploration
 
-**Expected result:** "No language found" error
+**Available subcommands include:**
+- `init` - Initialize a new parser project
+- `generate` - Generate parser code from grammar
+- `build-wasm` - Build WebAssembly parser
+- `test` - Run parser tests
+- `parse` - Parse files and output syntax trees
+- `query` - Run tree queries on parsed files
+- `highlight` - Generate syntax highlighting
+- `tags` - Generate tag files
 
-**Why:** The grammar is empty, so no parser exists yet. This is normal! You'll learn to write grammar rules in Module 5.
+**Key commands for parser development:**
+- `init` and `generate` - Core development workflow
+- `test` and `parse` - Testing and debugging
+- `query` - Advanced tree analysis

@@ -60,16 +60,36 @@ Represent unparseable text:
 
 Let's explore real syntax trees! We'll start with JavaScript since it's widely known.
 
-### Setup
-First, let's install the JavaScript parser and create some examples:
+### Grammar Availability (Recap)
+This module assumes you completed the global grammar directory setup in **Module 2**. Quick recap (do not repeat if already done):
 
+1. `tree-sitter init-config`
+2. Add a directory you control to `parser-directories` in `config.json`
+3. Clone required grammars (e.g. `tree-sitter-javascript`, `tree-sitter-python`) into that directory
+4. Parse a file to trigger initial build: `tree-sitter parse path/to/file.js`
+
+If you skipped Module 2’s optional section, go back and configure it now—everything here relies on those grammars being discoverable.
+
+If you see the error below when trying to parse:
+
+```
+tree-sitter parse tutorials/03-syntax-trees/examples/control-flow.js
+```
+
+and saw:
+
+```
+No language found
+```
+
+that means the CLI cannot find a grammar for that language. Re‑check: repo name, directory listed in `parser-directories`, toolchain installed.
+
+#### Example Files Directory
+Example source files live under `tutorials/03-syntax-trees/examples/`. Add or modify files there freely while practicing.
+
+To recreate the directory if missing:
 ```bash
-# Install JavaScript parser
-npm install tree-sitter-javascript
-
-# Create example files
-mkdir -p examples
-cd examples
+mkdir -p tutorials/03-syntax-trees/examples
 ```
 
 ### Example 1: Simple Function
