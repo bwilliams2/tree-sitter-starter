@@ -1,0 +1,4 @@
+2 + 3 * 4
+
+Expected: 2 + (3 * 4)
+Multiplication has higher precedence than addition.

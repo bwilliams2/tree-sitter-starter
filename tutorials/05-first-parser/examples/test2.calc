@@ -1,0 +1,7 @@
+// Test complex expressions
+let result = (5 + 3) * 2 - 1;
+
+// Test floating point numbers
+let pi = 3.14159;
+let radius = 5.0;
+let area = pi * radius * radius;

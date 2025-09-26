@@ -1,0 +1,15 @@
+// Simple variable declarations
+let x = 5;
+let y = 10;
+
+// Basic arithmetic
+x + y;
+x - y;
+x * y;
+x / y;
+
+// Expression with precedence
+2 + 3 * 4;  // Should be parsed as 2 + (3 * 4)
+
+// Parenthesized expressions
+(2 + 3) * 4;  // Should be parsed as (2 + 3) * 4

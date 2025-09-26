@@ -1,0 +1,7 @@
+function test( {
+    let x = ;
+    return x
+
+Broken code with multiple errors.
+Tree-sitter creates ERROR nodes but keeps parsing.
+This enables syntax highlighting even with errors.
