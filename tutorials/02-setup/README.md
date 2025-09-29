@@ -194,7 +194,7 @@ tree-sitter init-config
 This creates a JSON config file at one of these locations (platform dependent):
 | Platform | Default Path |
 |----------|--------------|
-| macOS    | `~/Library/Application Support/tree-sitter/config.json` (older versions: `~/.tree-sitter/config.json`) |
+| macOS    | `~/.tree-sitter/config.json` |
 | Linux    | `~/.tree-sitter/config.json` |
 | Windows  | `%APPDATA%/tree-sitter/config.json` |
 
